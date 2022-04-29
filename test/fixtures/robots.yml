@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  commonds: MyString
+  x_position: MyString
+  y_position: MyString
+  facing: MyString
+
+two:
+  commonds: MyString
+  x_position: MyString
+  y_position: MyString
+  facing: MyString

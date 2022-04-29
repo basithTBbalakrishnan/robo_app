@@ -1,0 +1,636 @@
+  [1m[35m (213.5ms)[0m  [1m[35mCREATE DATABASE "robo_app" ENCODING = 'utf8'[0m
+  [1m[35m (0.4ms)[0m  [1m[35mCREATE DATABASE "robo_app" ENCODING = 'utf8'[0m
+  [1m[35m (40.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (15.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(472435194513659580)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to DeviseCreateUsers (20220427114648)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (11.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp, "remember_created_at" timestamp, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_email" ON "users"  ("email")[0m
+  [1m[35m (5.3ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_reset_password_token" ON "users"  ("reset_password_token")[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220427114648"]]
+  [1m[35m (2.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to AddProfileFieldsToUsers (20220427114730)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.3ms)[0m  [1m[35mALTER TABLE "users" ADD "username" character varying[0m
+  [1m[35m (5.4ms)[0m  [1m[35mCREATE UNIQUE INDEX  "index_users_on_username" ON "users"  ("username")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mALTER TABLE "users" ADD "password" character varying[0m
+  [1m[35m (0.8ms)[0m  [1m[35mALTER TABLE "users" ADD "email" character varying[0m
+  [1m[35m (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(472435194513659580)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(472435194513659580)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to AddProfileFieldsToUsers (20220427114730)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.4ms)[0m  [1m[35mALTER TABLE "users" ADD "username" character varying[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20220427114730"]]
+  [1m[35m (4.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.6ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2022-04-27 11:51:28.689931"], ["updated_at", "2022-04-27 11:51:28.689931"]]
+  [1m[35m (2.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(472435194513659580)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/namitha/.rvm/gems/ruby-2.6.1/bin/rake:23)
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/namitha/.rvm/gems/ruby-2.6.1/bin/rake:23)
+Started POST "/users" for ::1 at 2022-04-27 17:34:14 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user1", "email"=>"user1@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user1", "email"=>"user1@gmail.com", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :username[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (5.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@gmail.com"], ["encrypted_password", "$2a$12$y.Kgsisf8.cUvgvBZmA9PO6j.tlXSiz2n0BDCR2cPuIR2/Q8DAm2u"], ["created_at", "2022-04-27 12:04:14.646708"], ["updated_at", "2022-04-27 12:04:14.646708"]]
+  [1m[35m (2.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 303ms (ActiveRecord: 11.8ms | Allocations: 17882)
+
+
+Started GET "/" for ::1 at 2022-04-27 17:34:14 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.7ms | Allocations: 472)
+Completed 200 OK in 9ms (Views: 5.4ms | ActiveRecord: 0.0ms | Allocations: 1630)
+
+
+Started POST "/users" for ::1 at 2022-04-27 17:39:50 +0530
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user2", "email"=>"user2@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user2", "email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :username[0m
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (1.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user2@gmail.com"], ["encrypted_password", "$2a$12$iGm4GIKZ/bBIt/Z8s.4JreIraqtSp9PYO02Wjm9vKfaTS458Z1JRe"], ["created_at", "2022-04-27 12:09:51.036112"], ["updated_at", "2022-04-27 12:09:51.036112"]]
+  [1m[35m (2.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 281ms (ActiveRecord: 4.8ms | Allocations: 13175)
+
+
+Started GET "/" for ::1 at 2022-04-27 17:39:51 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.2ms | Allocations: 196)
+Completed 200 OK in 6ms (Views: 5.0ms | ActiveRecord: 0.0ms | Allocations: 760)
+
+
+Started POST "/users" for ::1 at 2022-04-27 17:41:55 +0530
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user3", "email"=>"user3@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user3", "email"=>"user3@gmail.com", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :username[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user3@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user3@gmail.com"], ["encrypted_password", "$2a$12$PxJ661NADJ8eBLLBpO1xX.aMxpbovRSqkiAuPR47o0JUlWSuD/8Me"], ["created_at", "2022-04-27 12:11:56.109906"], ["updated_at", "2022-04-27 12:11:56.109906"]]
+  [1m[35m (7.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 268ms (ActiveRecord: 11.3ms | Allocations: 12338)
+
+
+Started GET "/" for ::1 at 2022-04-27 17:41:56 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.2ms | Allocations: 8)
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 241)
+
+
+Started POST "/users" for ::1 at 2022-04-27 17:43:28 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user4", "email"=>"user4@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user4", "email"=>"user4@gmail.com", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :username[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user4@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.5ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user4@gmail.com"], ["encrypted_password", "$2a$12$Zx/Wr4SXcn7rvVtm82ldTezv3Hqw8QF4iKPpX9gXk21ciIBj6HMhu"], ["created_at", "2022-04-27 12:13:28.926535"], ["updated_at", "2022-04-27 12:13:28.926535"]]
+  [1m[35m (3.4ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 278ms (ActiveRecord: 8.6ms | Allocations: 15875)
+
+
+Started GET "/" for ::1 at 2022-04-27 17:43:28 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.9ms | Allocations: 309)
+Completed 200 OK in 6ms (Views: 4.6ms | ActiveRecord: 0.0ms | Allocations: 1203)
+
+
+Started POST "/users" for ::1 at 2022-04-27 17:45:49 +0530
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user1", "email"=>"user1@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user1", "email"=>"user1@gmail.com", "password"=>"[FILTERED]"}}}
+[31mUnpermitted parameter: :username[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user1@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["email", "user1@gmail.com"], ["encrypted_password", "$2a$12$2ASazIDwlqcAyjw/VaZUAOGWIHd5AtJcJeALV6CVOTKhXu9NE/2z2"], ["created_at", "2022-04-27 12:15:50.297886"], ["updated_at", "2022-04-27 12:15:50.297886"]]
+  [1m[35m (3.6ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 264ms (ActiveRecord: 6.6ms | Allocations: 13455)
+
+
+Started GET "/" for ::1 at 2022-04-27 17:45:50 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 5.5ms | Allocations: 196)
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms | Allocations: 761)
+
+
+Started POST "/users" for ::1 at 2022-04-27 17:48:11 +0530
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user2", "email"=>"user2@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user2", "email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "user2@gmail.com"], ["encrypted_password", "$2a$12$3SJg81YH7f7YKPzIusrisOgctdHur/uuL6AoZwS7R8Xrg.AQ.pM36"], ["created_at", "2022-04-27 12:18:11.666939"], ["updated_at", "2022-04-27 12:18:11.666939"], ["username", "user2"]]
+  [1m[35m (3.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 265ms (ActiveRecord: 6.5ms | Allocations: 12276)
+
+
+Started GET "/" for ::1 at 2022-04-27 17:48:11 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 0.1ms | Allocations: 7)
+Completed 200 OK in 1ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 240)
+
+
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/namitha/.rvm/gems/ruby-2.6.1/bin/rake:23)
+Started POST "/users/sign_in" for ::1 at 2022-04-27 17:54:31 +0530
+  [1m[35m (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 462)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 1.4ms | Allocations: 645)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 22.2ms | Allocations: 9441)
+Completed 200 OK in 48ms (Views: 24.6ms | ActiveRecord: 4.5ms | Allocations: 17189)
+
+
+Started POST "/users/sign_in" for ::1 at 2022-04-27 17:57:39 +0530
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 295)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.2ms | Allocations: 156)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 1.5ms | Allocations: 1318)
+Completed 200 OK in 10ms (Views: 2.1ms | ActiveRecord: 2.1ms | Allocations: 7719)
+
+
+Started POST "/users/sign_in" for ::1 at 2022-04-27 17:58:30 +0530
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 196)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 152)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 1.1ms | Allocations: 1253)
+Completed 200 OK in 2ms (Views: 1.3ms | ActiveRecord: 0.0ms | Allocations: 1617)
+
+
+Started POST "/users/sign_in" for ::1 at 2022-04-27 18:04:13 +0530
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms | Allocations: 196)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.1ms | Allocations: 152)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 1.1ms | Allocations: 1253)
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.0ms | Allocations: 1616)
+
+
+Started POST "/users/sign_in" for ::1 at 2022-04-27 18:05:54 +0530
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 462)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.7ms | Allocations: 645)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 5.0ms | Allocations: 5434)
+Completed 200 OK in 31ms (Views: 15.0ms | ActiveRecord: 3.3ms | Allocations: 13150)
+
+
+Started POST "/users/sign_in" for ::1 at 2022-04-27 18:10:29 +0530
+  [1m[35m (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 462)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 645)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 5.8ms | Allocations: 5434)
+Completed 200 OK in 24ms (Views: 7.4ms | ActiveRecord: 2.7ms | Allocations: 13182)
+
+
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/namitha/.rvm/gems/ruby-2.6.1/bin/rake:23)
+Started POST "/users/login" for ::1 at 2022-04-27 18:12:51 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+No template found for SessionsController#create, rendering head :no_content
+Completed 204 No Content in 269ms (ActiveRecord: 3.4ms | Allocations: 12540)
+
+
+Started POST "/users/login" for ::1 at 2022-04-27 18:14:26 +0530
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+No template found for SessionsController#create, rendering head :no_content
+Completed 204 No Content in 247ms (ActiveRecord: 0.4ms | Allocations: 904)
+
+
+Started POST "/users/login" for ::1 at 2022-04-27 18:14:59 +0530
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 264ms (Views: 0.1ms | ActiveRecord: 2.3ms | Allocations: 7011)
+
+
+Started POST "/users/login" for ::1 at 2022-04-28 15:11:35 +0530
+  [1m[35m (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 274ms (Views: 0.4ms | ActiveRecord: 4.3ms | Allocations: 8478)
+
+
+Started POST "/users/login" for ::1 at 2022-04-28 15:37:23 +0530
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:834:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.4.8) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.4.8) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.4.8) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.4.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+railties (6.0.4.8) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/users/login" for ::1 at 2022-04-28 15:38:24 +0530
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:834:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.4.8) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.4.8) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.4.8) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.4.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+railties (6.0.4.8) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/users/login" for ::1 at 2022-04-28 15:38:25 +0530
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:834:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.4.8) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.4.8) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.4.8) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.4.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+railties (6.0.4.8) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/namitha/.rvm/gems/ruby-2.6.1/bin/rake:23)
+Started POST "/users/login" for ::1 at 2022-04-28 15:40:31 +0530
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:834:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.4.8) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.4.8) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.4.8) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.4.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+railties (6.0.4.8) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/users/login" for ::1 at 2022-04-28 15:41:55 +0530
+  
+ActionController::RoutingError (uninitialized constant SessionsController):
+  
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:92:in `rescue in controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.4.8) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:44:in `controller'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:18:in `block in <class:Constraints>'
+actionpack (6.0.4.8) lib/action_dispatch/routing/mapper.rb:48:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.4.8) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.4.8) lib/action_dispatch/routing/route_set.rb:834:in `call'
+warden (1.2.9) lib/warden/manager.rb:36:in `block in call'
+warden (1.2.9) lib/warden/manager.rb:34:in `catch'
+warden (1.2.9) lib/warden/manager.rb:34:in `call'
+rack (2.2.3) lib/rack/etag.rb:27:in `call'
+rack (2.2.3) lib/rack/conditional_get.rb:40:in `call'
+rack (2.2.3) lib/rack/head.rb:12:in `call'
+activerecord (6.0.4.8) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.4.8) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.4.8) lib/rails/rack/logger.rb:37:in `call_app'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.4.8) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.4.8) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.3) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.4.8) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.3) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.4.8) lib/action_dispatch/middleware/host_authorization.rb:103:in `call'
+railties (6.0.4.8) lib/rails/engine.rb:527:in `call'
+puma (4.3.12) lib/puma/configuration.rb:228:in `call'
+puma (4.3.12) lib/puma/server.rb:727:in `handle_request'
+puma (4.3.12) lib/puma/server.rb:476:in `process_client'
+puma (4.3.12) lib/puma/server.rb:332:in `block in run'
+puma (4.3.12) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started POST "/users/login" for ::1 at 2022-04-28 15:43:53 +0530
+  
+SyntaxError (/home/namitha/Documents/AptanaStudio3Workspace/robo_app/config/routes.rb:2: syntax error, unexpected ':', expecting end
+..._for :users, controllers/users: { sessions: :sessions },
+...                              ^
+/home/namitha/Documents/AptanaStudio3Workspace/robo_app/config/routes.rb:2: syntax error, unexpected ',', expecting end-of-input
+...users: { sessions: :sessions },
+...                              ^):
+  
+config/routes.rb:2: syntax error, unexpected ':', expecting end
+config/routes.rb:2: syntax error, unexpected ',', expecting end-of-input
+config/routes.rb:2: syntax error, unexpected ':', expecting end
+config/routes.rb:2: syntax error, unexpected ',', expecting end-of-input
+Started POST "/users/login" for ::1 at 2022-04-28 15:44:36 +0530
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 1ms (ActiveRecord: 0.0ms | Allocations: 466)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.8ms | Allocations: 645)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 8.7ms | Allocations: 5434)
+Completed 200 OK in 20ms (Views: 11.4ms | ActiveRecord: 2.9ms | Allocations: 13158)
+
+
+DEPRECATION WARNING: Using `bin/rake routes` is deprecated and will be removed in Rails 6.1. Use `bin/rails routes` instead.
+ (called from load at /home/namitha/.rvm/gems/ruby-2.6.1/bin/rake:23)
+Started POST "/users/login" for ::1 at 2022-04-28 15:47:14 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+Completed 401 Unauthorized in 2ms (ActiveRecord: 0.0ms | Allocations: 462)
+
+
+Processing by Devise::SessionsController#new as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/shared/_links.html.erb (Duration: 0.9ms | Allocations: 645)
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/devise-4.8.1/app/views/devise/sessions/new.html.erb (Duration: 5.0ms | Allocations: 5434)
+Completed 200 OK in 24ms (Views: 6.4ms | ActiveRecord: 2.6ms | Allocations: 13178)
+
+
+Started POST "/users/login" for ::1 at 2022-04-28 15:48:13 +0530
+Processing by SessionsController#create as */*
+  Parameters: {"email"=>"user2@gmail.com", "password"=>"[FILTERED]", "session"=>{"email"=>"user2@gmail.com", "password"=>"[FILTERED]"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user2@gmail.com"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 266ms (Views: 0.1ms | ActiveRecord: 2.4ms | Allocations: 7886)
+
+
+Started POST "/users" for ::1 at 2022-04-28 16:28:47 +0530
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user3", "email"=>"user3@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user3", "email"=>"user3@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user3@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (1.9ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "user3@gmail.com"], ["encrypted_password", "$2a$12$4IeQojYS.ad1hyKUfF1k3eXYlq7r/J7opkHK5CjIho53GIW.LpMS2"], ["created_at", "2022-04-28 10:58:48.118558"], ["updated_at", "2022-04-28 10:58:48.118558"], ["username", "user3"]]
+  [1m[35m (2.7ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 276ms (ActiveRecord: 8.0ms | Allocations: 15920)
+
+
+Started GET "/" for ::1 at 2022-04-28 16:28:48 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.6ms | Allocations: 309)
+Completed 200 OK in 6ms (Views: 5.2ms | ActiveRecord: 0.0ms | Allocations: 1203)
+
+
+Started POST "/users" for ::1 at 2022-04-28 16:31:35 +0530
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user4", "email"=>"user4@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user4", "email"=>"user4@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user4@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "user4@gmail.com"], ["encrypted_password", "$2a$12$AlVej9WBD30FJnPjKoXHpepB5nQBKmEq78/GbXynRNCiQKLFJMnQe"], ["created_at", "2022-04-28 11:01:35.796185"], ["updated_at", "2022-04-28 11:01:35.796185"], ["username", "user4"]]
+  [1m[35m (9.8ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 281ms (ActiveRecord: 13.2ms | Allocations: 13444)
+
+
+Started GET "/" for ::1 at 2022-04-28 16:31:35 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.4ms | Allocations: 196)
+Completed 200 OK in 8ms (Views: 5.4ms | ActiveRecord: 0.0ms | Allocations: 761)
+
+
+Started POST "/users" for ::1 at 2022-04-28 16:33:27 +0530
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Devise::RegistrationsController#create as */*
+  Parameters: {"user"=>{"username"=>"user5", "email"=>"user5@gmail.com", "password"=>"[FILTERED]"}, "registration"=>{"user"=>{"username"=>"user5", "email"=>"user5@gmail.com", "password"=>"[FILTERED]"}}}
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "user5@gmail.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "created_at", "updated_at", "username") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["email", "user5@gmail.com"], ["encrypted_password", "$2a$12$NL3VUlaePtacSmey2sFTsuwBpeSoILjTE9iHQiQFkuweBYUn7jaxO"], ["created_at", "2022-04-28 11:03:27.332710"], ["updated_at", "2022-04-28 11:03:27.332710"], ["username", "user5"]]
+  [1m[35m (10.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 295ms (ActiveRecord: 14.1ms | Allocations: 15888)
+
+
+Started GET "/" for ::1 at 2022-04-28 16:33:27 +0530
+Processing by Rails::WelcomeController#index as */*
+  Rendering /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /home/namitha/.rvm/gems/ruby-2.6.1/gems/railties-6.0.4.8/lib/rails/templates/rails/welcome/index.html.erb (Duration: 3.8ms | Allocations: 309)
+Completed 200 OK in 6ms (Views: 4.5ms | ActiveRecord: 0.0ms | Allocations: 1203)
+
+
